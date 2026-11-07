@@ -1,0 +1,14 @@
+*.qcow2
+*.qcow2.*
+*.iso
+*.raw
+*.pcap
+*.log
+runtime/
+evidence/
+reports/
+state/
+__pycache__/
+.pytest_cache/
+*.pyc
+cpp/build/

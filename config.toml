@@ -1,0 +1,43 @@
+# Paths are deliberately kept inside this project by default.
+# Put the official Windows 11 x64 ISO at iso/Win11.iso or set iso_path.
+project_root = "."
+iso_path = "iso/Win11.iso"
+base_dir = "images"
+session_dir = "sessions"
+evidence_dir = "evidence"
+report_dir = "reports"
+state_dir = "state"
+
+[vm]
+name = "win11-malware-base"
+vcpus = 8
+memory_mib = 12288
+disk_gib = 64
+machine = "q35"
+
+[network]
+name = "win11-analysis-isolated"
+bridge = "virbr-malware"
+ipv4 = "192.0.2.1/24"
+dhcp_start = "192.0.2.100"
+dhcp_end = "192.0.2.199"
+forward = false
+
+[analysis]
+default_timeout_seconds = 900
+keep_failed_sessions = true
+capture_packets = true
+
+[baseline]
+# Install these once in the base VM before running base-seal.
+# Every disposable overlay then starts with the same reviewed software set.
+items = [
+  "Python 3",
+  ".NET Desktop Runtime",
+  "Microsoft Visual C++ Redistributables",
+  "7-Zip",
+  "Firefox",
+  "Chrome",
+  "Discord",
+  "the reviewed test game build",
+]
